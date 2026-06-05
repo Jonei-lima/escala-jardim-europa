@@ -74,20 +74,21 @@ with aba1:
         av_quinta = st.selectbox("Operador de Áudio e Vídeo (Som/Imagem)", lista_av_permitidos, key="av_q")
         ativar_nec_locais = st.checkbox("Esta semana terá a parte de 'Necessidades Locais'?")
         anciao_nec_locais = None
-        if activar_nec_locais:
-            anciao_nec_locais = st.selectbox("Ancião designado para as Necessidades Locais", lista_anciaos)
+        if ajustar_caixa_selecao := ajustar_caixa_selecao := ativar_nec_locais:
+            if lista_anciaos:
+                anciao_nec_locais = st.selectbox("Ancião designado para as Necessidades Locais", lista_anciaos)
 
     st.markdown("---")
 
     if st.button("🚀 Executar Inteligência e Montar Escala"):
-        st.success(f"Grade montada com sucesso para a Congregação Jardim Europa!")
+        st.success("Grade montada com sucesso para a Congregação Jardim Europa!")
         
         leitores_quinta_disponiveis = st.session_state.membros[st.session_state.membros["Leitor_Quinta"] == True]["Nome"].tolist()
         leitores_sentinela_disponiveis = st.session_state.membros[st.session_state.membros["Leitor_Sentinela"] == True]["Nome"].tolist()
         
-        leitor_q_sorteado = leitores_quinta_disponiveis[0]
-        leitor_estudo_sorteado = leitores_quinta_disponiveis[2]
-        leitor_sentinela_sorteado = leitores_sentinela_disponiveis[1]
+        leitor_q_sorteado = leitores_quinta_disponiveis[0] if leitores_quinta_disponiveis else "Sem leitor disponível"
+        leitor_estudo_sorteado = leitores_quinta_disponiveis[2] if len(leitores_quinta_disponiveis) > 2 else "Sem leitor disponível"
+        leitor_sentinela_sorteado = leitores_sentinela_disponiveis[1] if len(leitores_sentinela_disponiveis) > 1 else "Sem leitor disponível"
         
         volante = "Irmão A"
         ind_interno = "Irmão B"
@@ -116,7 +117,7 @@ with aba1:
                 
             st.markdown("---")
             st.markdown("**[VIDA CRISTÃ]**")
-            if activar_nec_locais:
+            if ativar_nec_locais:
                 st.write(f"⚠️ Necessidades Locais: {anciao_nec_locais}")
             st.write(f"📖 Estudo Bíblico (Dirigente): {dirigente_estudo}")
             st.write(f"🎙️ Estudo Bíblico (Leitor): `{leitor_estudo_sorteado}`")
