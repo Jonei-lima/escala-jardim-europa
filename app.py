@@ -74,7 +74,7 @@ with aba1:
         av_quinta = st.selectbox("Operador de Áudio e Vídeo (Som/Imagem)", lista_av_permitidos, key="av_q")
         ativar_nec_locais = st.checkbox("Esta semana terá a parte de 'Necessidades Locais'?")
         anciao_nec_locais = None
-        if activar_nec_locais := activar_nec_locais:
+        if activar_nec_locais:
             anciao_nec_locais = st.selectbox("Ancião designado para as Necessidades Locais", lista_anciaos)
 
     st.markdown("---")
