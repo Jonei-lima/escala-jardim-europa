@@ -6,54 +6,57 @@ import random
 # Configuracao da pagina
 st.set_page_config(page_title="Gerenciador Jardim Europa", layout="wide")
 
-# Inicializacao do banco de dados com inclusao das irmas para o treinamento
-if 'membros' not in st.session_state:
-    st.session_state.membros = pd.DataFrame([
-        # Os 11 Anciaos
-        {"Nome": "Alanderson Carvalho", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Alex Oliveira", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Damião Sobrinho", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": True},
-        {"Nome": "Diassis Morais", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Edilson Junior", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Erivaldo Cavalcante", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Gildênio Almeida", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "José Santana", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Josevi Trindade", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Ray Morais", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        {"Nome": "Sidney Ramos", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        
-        # Homens com qualificacoes especificas
-        {"Nome": "Alcides Morais", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Felipe Berge", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
-        {"Nome": "Jonei Lima", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
-        {"Nome": "Juan Pablo", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Marco Antônio", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Marcos Antônio", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        
-        # Demais homens habilitados
-        {"Nome": "Alex Cauã", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Anderson Cauê", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Bruno Giovanni", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
-        {"Nome": "Carlos Veras", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Fabio Diniz", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Fabricio Diniz", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Felipe Pereira", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Geraldo Soares", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Manoel Rodrigues", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Nilson Bomfim", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Roberto Rocha", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Rodrigo Santana", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
-        {"Nome": "Wesley Rodrigues", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Adalberto Pereira", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
-        
-        # Irmas cadastradas para o bloco de treinamento (Faça Seu Melhor)
-        {"Nome": "Cássia Leite", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Jane Morais", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Elizangela Santana", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Rita Lima", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Alexandra Berge", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
-        {"Nome": "Itala Giovanni", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False}
-    ])
+# Lista oficial para restaurar a estrutura correta se houver quebra de cache
+lista_membros_oficial = [
+    # Os 11 Anciaos
+    {"Nome": "Alanderson Carvalho", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Alex Oliveira", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Damião Sobrinho", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": True},
+    {"Nome": "Diassis Morais", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Edilson Junior", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Erivaldo Cavalcante", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Gildênio Almeida", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "José Santana", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Josevi Trindade", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Ray Morais", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": True, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    {"Nome": "Sidney Ramos", "Cargo": "Anciao", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    
+    # Homens com qualificacoes especificas
+    {"Nome": "Alcides Morais", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Felipe Berge", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
+    {"Nome": "Jonei Lima", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
+    {"Nome": "Juan Pablo", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Marco Antônio", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Marcos Antônio", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": True, "Disc_Publico": True, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    
+    # Demais homens habilitados
+    {"Nome": "Alex Cauã", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Anderson Cauê", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Bruno Giovanni", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
+    {"Nome": "Carlos Veras", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Fabio Diniz", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Fabricio Diniz", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Felipe Pereira", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Geraldo Soares", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Manoel Rodrigues", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Nilson Bomfim", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Roberto Rocha", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Rodrigo Santana", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": True, "Leitura_Biblia": True, "Disc_Estudante": True, "Audio_Video": True},
+    {"Nome": "Wesley Rodrigues", "Cargo": "Publicador", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": True, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Adalberto Pereira", "Cargo": "Servo", "Sexo": "M", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": False, "Audio_Video": False},
+    
+    # Irmas cadastradas para o bloco de treinamento (Faça Seu Melhor)
+    {"Nome": "Cássia Leite", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Jane Morais", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Elizangela Santana", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Rita Lima", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Alexandra Berge", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False},
+    {"Nome": "Itala Giovanni", "Cargo": "Publicador", "Sexo": "F", "Pres_Quinta": False, "Pres_Domingo": False, "Disc_Publico": False, "Leitor_Estudo": False, "Leitor_Sentinela": False, "Leitura_Biblia": False, "Disc_Estudante": True, "Audio_Video": False}
+]
+
+# Forca limpeza total do cache estrutural antigo
+if 'membros' not in st.session_state or "Sexo" not in st.session_state.membros.columns:
+    st.session_state.membros = pd.DataFrame(lista_membros_oficial)
 
 # Menu Lateral de Acesso
 st.sidebar.header("Controle de Acesso")
@@ -72,7 +75,6 @@ with aba1:
         col_d1, col_d2 = st.columns(2)
         with col_d1:
             data_escolhida = st.date_input("Selecione um dia da semana", datetime.now())
-            # Calculo automatico da segunda-feira correspondente
             segunda_feira = data_escolhida - timedelta(days=data_escolhida.weekday())
             st.info(f"**Semana de {segunda_feira.strftime('%d/%m/%Y')}** (Baseada na segunda-feira)")
         with col_d2:
@@ -88,7 +90,7 @@ with aba1:
         with col_m1:
             presidente_q = st.selectbox("Presidente da Reuniao", lista_pres_quinta)
             
-            # Filtragem restrita: remove o Presidente selecionado para evitar choque de horario
+            # Filtro limpo removendo o Presidente
             lista_anciaos_filtrada = st.session_state.membros[(st.session_state.membros["Cargo"] == "Anciao") & (st.session_state.membros["Nome"] != presidente_q)]["Nome"].tolist()
             
             dirigente_estudo = st.selectbox("Dirigente do Estudo", lista_anciaos_filtrada)
@@ -98,7 +100,6 @@ with aba1:
             necessidades_locais = st.checkbox("Incluir secao de Necessidades Locais?")
             anciao_nec_locais = "Nao se aplica"
             if necessidades_locais:
-                # Remove o Presidente tambem desta secao
                 lista_nec_locais = [a for a in lista_anciaos_filtrada]
                 anciao_nec_locais = st.selectbox("Anciao designado para Necessidades Locais", lista_nec_locais)
 
@@ -108,12 +109,15 @@ with aba1:
             seed_data = int(segunda_feira.strftime("%Y%m%d"))
             random.seed(seed_data)
             
-            indisponiveis_total = [presidente_q, dirigente_estudo, anciao_nec_locais]
+            # Damião ou qualquer outro operador fixado no som entra aqui para blindagem absoluta
+            indisponiveis_total = [presidente_q, dirigente_estudo, anciao_nec_locais, av_operador]
             
-            # Filtro das listas dinamicas diretas do DataFrame removendo ocupados estruturais
-            lista_leitura_biblia = st.session_state.membros[(st.session_state.membros["Leitura_Biblia"] == True) & (~st.session_state.membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
-            lista_leitor_estudo = st.session_state.membros[(st.session_state.membros["Leitor_Estudo"] == True) & (~st.session_state.membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
-            lista_leitor_sentinela = st.session_state.membros[(st.session_state.membros["Leitor_Sentinela"] == True) & (~st.session_state.membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
+            # Filtro com sintaxe explicita corrigida
+            df_membros = st.session_state.membros
+            
+            lista_leitura_biblia = df_membros[(df_membros["Leitura_Biblia"] == True) & (~df_membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
+            lista_leitor_estudo = df_membros[(df_membros["Leitor_Estudo"] == True) & (~df_membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
+            lista_leitor_sentinela = df_membros[(df_membros["Leitor_Sentinela"] == True) & (~df_membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
             
             random.shuffle(lista_leitura_biblia)
             random.shuffle(lista_leitor_estudo)
@@ -123,19 +127,18 @@ with aba1:
             leitor_e_fim = [i for i in lista_leitor_estudo if i != leitor_b_fim][0] if len([i for i in lista_leitor_estudo if i != leitor_b_fim]) > 0 else "Disponivel"
             leitor_s_fim = [i for i in lista_leitor_sentinela if i not in [leitor_b_fim, leitor_e_fim]][0] if lista_leitor_sentinela else "Disponivel"
 
-            # Separacao de estudantes por prioridade de genero (Irmas primeiro)
-            estudantes_f = st.session_state.membros[(st.session_state.membros["Disc_Estudante"] == True) & (st.session_state.membros["Sexo"] == "F")]["Nome"].tolist()
-            estudantes_m = st.session_state.membros[(st.session_state.membros["Disc_Estudante"] == True) & (st.session_state.membros["Sexo"] == "M") & (~st.session_state.membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
+            # Corrigida a linha 127 com a sintaxe direta do Pandas sem duplicacao de escopo
+            estudantes_f = df_membros[(df_membros["Disc_Estudante"] == True) & (df_membros["Sexo"] == "F")]["Nome"].tolist()
+            estudantes_m = df_membros[(df_membros["Disc_Estudante"] == True) & (df_membros["Sexo"] == "M") & (~df_membros["Nome"].isin(indisponiveis_total))]["Nome"].tolist()
             
             random.shuffle(estudantes_f)
             random.shuffle(estudantes_m)
             
-            # Fila unificada priorizando mulheres
             fila_treinamento = estudantes_f + estudantes_m
 
-            # Indicadores de apoio estrutural mecanicos
-            todos_homens = st.session_state.membros[(st.session_state.membros["Cargo"] != "Anciao") & (st.session_state.membros["Nome"] != "Adalberto Pereira") & (st.session_state.membros["Sexo"] == "M")]["Nome"].tolist()
-            homens_apoio = [i for i in todos_homens if i not in [leitor_b_fim, leitor_e_fim, av_operador]]
+            # Auxiliares de apoio estrutural masculino sem choques
+            todos_homens = df_membros[(df_membros["Cargo"] != "Anciao") & (df_membros["Nome"] != "Adalberto Pereira") & (df_membros["Sexo"] == "M")]["Nome"].tolist()
+            homens_apoio = [i for i in todos_homens if i not in [leitor_b_fim, leitor_e_fim] and i not in indisponiveis_total]
             random.shuffle(homens_apoio)
             
             volante = homens_apoio[0] if len(homens_apoio) > 0 else "Disponivel"
@@ -160,13 +163,11 @@ with aba1:
                 
                 idx_t = 0
                 for i in range(1, num_partes_min + 1):
-                    # Sala Principal
                     p1 = fila_treinamento[idx_t % len(fila_treinamento)]
                     p2 = fila_treinamento[(idx_t + 1) % len(fila_treinamento)]
                     st.write(f"Parte {i} - **Sala Principal**: {p1} / {p2}")
                     idx_t += 2
                     
-                    # Sala B
                     p3 = fila_treinamento[idx_t % len(fila_treinamento)]
                     p4 = fila_treinamento[(idx_t + 1) % len(fila_treinamento)]
                     st.write(f"Parte {i} - **Sala B**: {p3} / {p4}")
@@ -188,3 +189,13 @@ with aba1:
                 st.markdown("---")
                 st.write("**Discurso Publico:** [Orador Convidado]")
                 st.write(f"**Leitor de Secao:** {leitor_s_fim}")
+
+with aba2:
+    st.header("Verificacao de Habilitados por Categoria")
+    col_l1, col_l2 = st.columns(2)
+    with col_l1:
+        st.subheader("Irmas no Treinamento")
+        st.dataframe(st.session_state.membros[(st.session_state.membros["Disc_Estudante"] == True) & (st.session_state.membros["Sexo"] == "F")][["Nome"]], hide_index=True)
+    with col_l2:
+        st.subheader("Operadores de Som Cadastrados")
+        st.dataframe(st.session_state.membros[st.session_state.membros["Audio_Video"] == True][["Nome"]], hide_index=True)
