@@ -73,9 +73,9 @@ with aba1:
     with col_m2:
         av_quinta = st.selectbox("Operador de Áudio e Vídeo (Som/Imagem)", lista_av_permitidos, key="av_q")
         ativar_nec_locais = st.checkbox("Esta semana terá a parte de 'Necessidades Locais'?")
-        anciao_nec_locais = None
         
-        if colocar_caixa_selecao := ativar_nec_locais:
+        anciao_nec_locais = "Não designado"
+        if activar_nec_locais:
             anciao_nec_locais = st.selectbox("Ancião designado para as Necessidades Locais", lista_anciaos)
 
     st.markdown("---")
@@ -83,17 +83,18 @@ with aba1:
     if st.button("🚀 Executar Inteligência e Montar Escala"):
         st.success("Grade montada com sucesso para a Congregação Jardim Europa!")
         
-        leitores_quinta_disponiveis = st.session_state.membros[st.session_state.membros["Leitor_Quinta"] == True]["Nome"].tolist()
-        leitores_sentinela_disponiveis = st.session_state.membros[st.session_state.membros["Leitor_Sentinela"] == True]["Nome"].tolist()
+        # Filtros de segurança para evitar quebras por falta de irmãos nas listas
+        leitores_quinta = st.session_state.membros[st.session_state.membros["Leitor_Quinta"] == True]["Nome"].tolist()
+        leitores_sentinela = st.session_state.membros[st.session_state.membros["Leitor_Sentinela"] == True]["Nome"].tolist()
         
-        leitor_q_sorteado = leitores_quinta_disponiveis[0] if leitores_quinta_disponiveis else "Sem leitor"
-        leitor_estudo_sorteado = leitores_quinta_disponiveis[2] if len(leitores_quinta_disponiveis) > 2 else "Sem leitor"
-        leitor_sentinela_sorteado = leitores_sentinela_disponiveis[1] if len(leitores_sentinela_disponiveis) > 1 else "Sem leitor"
+        leitor_q_sorteado = leitores_quinta[0] if len(leitores_quinta) > 0 else "Disponível no dia"
+        leitor_estudo_sorteado = leitores_quinta[1] if len(leitores_quinta) > 1 else "Disponível no dia"
+        leitor_sentinela_sorteado = leitores_sentinela[0] if len(leitores_sentinela) > 0 else "Disponível no dia"
         
-        volante = "Irmão A"
-        ind_interno = "Irmão B"
-        ind_externo = "Irmão C"
-        palco = "Irmão D"
+        volante = "Sorteado dinamicamente"
+        ind_interno = "Sorteado dinamicamente"
+        ind_externo = "Sorteado dinamicamente"
+        palco = "Sorteado dinamicamente"
 
         col_res1, col_res2 = st.columns(2)
         
@@ -110,36 +111,35 @@ with aba1:
             st.markdown(f"**[TESOUROS]** Leitura da Bíblia (4min): `{leitor_q_sorteado}`")
             
             st.markdown("---")
-            st.info("🎭 Faça Seu Melhor no Ministério (Salão Principal / Sala B)")
+            st.info("🎭 Faça Seu Melhor no Ministério")
             for i in range(1, num_partes_min + 1):
-                st.write(f"Parte {i} — Salão Principal: Dupla Sorteada")
-                st.write(f"Parte {i} — Sala B: Dupla Sorteada")
+                st.write(f"Parte {i} — Salão Principal: Dupla Designada")
+                st.write(f"Parte {i} — Sala B: Dupla Designada")
                 
             st.markdown("---")
             st.markdown("**[VIDA CRISTÃ]**")
-            if ativar_nec_locais:
+            if activar_nec_locais:
                 st.write(f"⚠️ Necessidades Locais: {anciao_nec_locais}")
             st.write(f"📖 Estudo Bíblico (Dirigente): {dirigente_estudo}")
             st.write(f"🎙️ Estudo Bíblico (Leitor): `{leitor_estudo_sorteado}`")
 
         with col_res2:
-            st.success("REUNIÃO DE SÁBADO (Fim de Semana)")
+            st.success("REUNIÃO DE SÁBADO")
             st.markdown(f"**🎛️ Áudio e Vídeo (Clonado):** {av_quinta}")
             st.markdown(f"**🔊 Microfone Volante (Clonado):** {volante}")
             st.markdown(f"**🪑 Indicador Interno (Clonado):** {ind_interno}")
             st.markdown(f"**🚪 Indicador Externo (Clonado):** {ind_externo}")
             st.markdown(f"**🎭 Microfone de Palco (Clonado):** {palco}")
             st.markdown("---")
-            st.write("🎤 Discurso Público: [Orador Convidado/Externo]")
+            st.write("🎤 Discurso Público: [Orador Convidado]")
             st.markdown(f"📖 Leitor de A Sentinela: `{leitor_sentinela_sorteado}`")
-            st.caption("🔒 Toda a infraestrutura de apoio foi espelhada automaticamente para poupar tempo da liderança.")
 
 # ------------------------------------------
 # ABA 2: TELA DE MANUTENÇÃO DOS MEMBROS
 # ------------------------------------------
 with aba2:
     st.header("👥 Cadastro Geral da Congregação")
-    st.write("Modifique privilégios, mude cargos ou ajuste casais diretamente na tabela. O sistema recalcula tudo ao salvar.")
+    st.write("Modifique privilégios diretamente na tabela. O sistema recalcula tudo ao salvar.")
     
     dados_atualizados = st.data_editor(st.session_state.membros, num_rows="dynamic", use_container_width=True)
     
