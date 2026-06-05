@@ -9,39 +9,29 @@ st.set_page_config(page_title="Congregação Jardim Europa - Escalas", layout="w
 # 1. BANCO DE DADOS INICIAL (MEMÓRIA DO APP)
 # ==========================================
 if 'membros' not in st.session_state:
-    # Cadastro oficial atualizado com privilégios, restrições e vínculos familiares
     st.session_state.membros = pd.DataFrame([
         {"Nome": "Jonei Lima", "Sexo": "M", "Cargo": "Servo", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": True, "Familia": "Jonei Lima"},
         {"Nome": "Cássia Leite", "Sexo": "F", "Cargo": "Publicador", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Jonei Lima"},
-        
         {"Nome": "Alcides Morais", "Sexo": "M", "Cargo": "Ancião", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": False, "Familia": "Alcides Morais"},
         {"Nome": "Jane", "Sexo": "F", "Cargo": "Publicador", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Alcides Morais"},
-        
         {"Nome": "José Santana", "Sexo": "M", "Cargo": "Ancião", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": True, "Familia": "José Santana"},
         {"Nome": "Elizangela Santana", "Sexo": "F", "Cargo": "Publicador", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "José Santana"},
         {"Nome": "Rodrigo Santana", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": True, "Familia": "José Santana"},
-        
         {"Nome": "Damião", "Sexo": "M", "Cargo": "Ancião", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": True, "Familia": "Damião"},
         {"Nome": "Rita Lima", "Sexo": "F", "Cargo": "Publicador", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Damião"},
-        
         {"Nome": "Felipe Berge", "Sexo": "M", "Cargo": "Servo", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": True, "Familia": "Felipe Berge"},
         {"Nome": "Alexandra", "Sexo": "F", "Cargo": "Publicador", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Felipe Berge"},
-        
         {"Nome": "Bruno Giovanni", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": True, "Familia": "Bruno Giovanni"},
         {"Nome": "Itala", "Sexo": "F", "Cargo": "Publicador", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Bruno Giovanni"},
-        
         {"Nome": "Alex Cauã", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Alex Oliveira"},
         {"Nome": "Anderson Cauê", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Alex Oliveira"},
-        
         {"Nome": "Juan Pablo", "Sexo": "M", "Cargo": "Servo", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": False, "Familia": "Nilson Bomfim"},
         {"Nome": "Nilson Bomfim", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": False, "Familia": "Nilson Bomfim"},
-        
         {"Nome": "Carlos Veras", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Avulso"},
         {"Nome": "Fabio Diniz", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Avulso"},
         {"Nome": "Fabricio Diniz", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Avulso"},
         {"Nome": "Felipe Pereira", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": False, "Familia": "Felipe Pereira"},
         {"Nome": "Marco Antônio", "Sexo": "M", "Cargo": "Servo", "Leitor_Quinta": True, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Avulso"},
-        {"Nome": "Rodrigo Santana", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": True, "Audio_Video": False, "Familia": "José Santana"},
         {"Nome": "Wesley Rodrigues", "Sexo": "M", "Cargo": "Publicador", "Leitor_Quinta": True, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Avulso"},
         {"Nome": "Adalberto Pereira", "Sexo": "M", "Cargo": "Servo", "Leitor_Quinta": False, "Leitor_Sentinela": False, "Audio_Video": False, "Familia": "Avulso"}
     ])
@@ -49,8 +39,8 @@ if 'membros' not in st.session_state:
 # ==========================================
 # 2. INTERFACE VISUAL DO USUÁRIO
 # ==========================================
-st.title("🏛️ Congregação Jardim Europa")
-st.subheader("Gestor Automatizado de Reuniões — ORBI IA")
+st.title("Congregação Jardim Europa")
+st.subheader("Gestor Automatizado de Reuniões")
 st.caption("Filtros automáticos de privilégios, controle familiar e espelhamento Quinta ➡️ Sábado")
 
 aba1, aba2 = st.tabs(["🗓️ Gerar Escala da Semana", "👥 Cadastro de Membros"])
@@ -72,7 +62,6 @@ with aba1:
     st.subheader("✍️ Designações Manuais (Anciãos e Responsáveis Técnicos)")
     col_m1, col_m2 = st.columns(2)
     
-    # Filtros de segurança para os menus suspensos manuais
     lista_anciaos = st.session_state.membros[st.session_state.membros["Cargo"] == "Ancião"]["Nome"].tolist()
     lista_av_permitidos = ["José Santana", "Damião"]
     
@@ -85,25 +74,21 @@ with aba1:
         av_quinta = st.selectbox("Operador de Áudio e Vídeo (Som/Imagem)", lista_av_permitidos, key="av_q")
         ativar_nec_locais = st.checkbox("Esta semana terá a parte de 'Necessidades Locais'?")
         anciao_nec_locais = None
-        if activar_nec_locais:
+        if activar_nec_locais := activar_nec_locais:
             anciao_nec_locais = st.selectbox("Ancião designado para as Necessidades Locais", lista_anciaos)
 
     st.markdown("---")
 
-    # Execução do mecanismo de geração da grade
     if st.button("🚀 Executar Inteligência e Montar Escala"):
         st.success(f"Grade montada com sucesso para a Congregação Jardim Europa!")
         
-        # Filtros de listas estritas para o sorteio automático
         leitores_quinta_disponiveis = st.session_state.membros[st.session_state.membros["Leitor_Quinta"] == True]["Nome"].tolist()
         leitores_sentinela_disponiveis = st.session_state.membros[st.session_state.membros["Leitor_Sentinela"] == True]["Nome"].tolist()
         
-        # Simulação inteligente de sorteio (respeitando as regras de privilégios)
         leitor_q_sorteado = leitores_quinta_disponiveis[0]
         leitor_estudo_sorteado = leitores_quinta_disponiveis[2]
         leitor_sentinela_sorteado = leitores_sentinela_disponiveis[1]
         
-        # Nomes fictícios para o suporte técnico que serão clonados
         volante = "Irmão A"
         ind_interno = "Irmão B"
         ind_externo = "Irmão C"
@@ -111,7 +96,6 @@ with aba1:
 
         col_res1, col_res2 = st.columns(2)
         
-        # GRADE DE QUINTA-FEIRA
         with col_res1:
             st.warning("📅 REUNIÃO DE QUINTA-FEIRA")
             st.markdown(f"**🎛️ Áudio e Vídeo:** {av_quinta}")
@@ -137,9 +121,8 @@ with aba1:
             st.write(f"📖 Estudo Bíblico (Dirigente): {dirigente_estudo}")
             st.write(f"🎙️ Estudo Bíblico (Leitor): `{leitor_estudo_sorteado}`")
 
-        # GRADE DE SÁBADO (Clonagem automática e assertiva)
         with col_res2:
-            st.success("⛪ REUNIÃO DE SÁBADO (Fim de Semana)")
+            st.success("REUNIÃO DE SÁBADO (Fim de Semana)")
             st.markdown(f"**🎛️ Áudio e Vídeo (Clonado):** {av_quinta}")
             st.markdown(f"**🔊 Microfone Volante (Clonado):** {volante}")
             st.markdown(f"**🪑 Indicador Interno (Clonado):** {ind_interno}")
@@ -157,9 +140,8 @@ with aba2:
     st.header("👥 Cadastro Geral da Congregação")
     st.write("Modifique privilégios, mude cargos ou ajuste casais diretamente na tabela. O sistema recalcula tudo ao salvar.")
     
-    # Interface direta no estilo planilha para o Jonei ou outro irmão editar com cliques
     dados_atualizados = st.data_editor(st.session_state.membros, num_rows="dynamic", use_container_width=True)
     
-    if st.button("💾 Salvar Alterações no Banco de Dados"):
+    if st.button("💾 Salvar Alterações no Banco De Dados"):
         st.session_state.membros = dados_atualizados
         st.success("As alterações foram gravadas na estrutura do aplicativo!")
