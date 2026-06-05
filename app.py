@@ -72,10 +72,10 @@ with aba1:
     
     with col_m2:
         av_quinta = st.selectbox("Operador de Áudio e Vídeo (Som/Imagem)", lista_av_permitidos, key="av_q")
-        ativar_nec_locais = st.checkbox("Esta semana terá a parte de 'Necessidades Locais'?")
+        necessidades_locais = st.checkbox("Esta semana terá a parte de 'Necessidades Locais'?")
         
         anciao_nec_locais = "Não designado"
-        if activar_nec_locais:
+        if necessidades_locais:
             anciao_nec_locais = st.selectbox("Ancião designado para as Necessidades Locais", lista_anciaos)
 
     st.markdown("---")
@@ -83,7 +83,6 @@ with aba1:
     if st.button("🚀 Executar Inteligência e Montar Escala"):
         st.success("Grade montada com sucesso para a Congregação Jardim Europa!")
         
-        # Filtros de segurança para evitar quebras por falta de irmãos nas listas
         leitores_quinta = st.session_state.membros[st.session_state.membros["Leitor_Quinta"] == True]["Nome"].tolist()
         leitores_sentinela = st.session_state.membros[st.session_state.membros["Leitor_Sentinela"] == True]["Nome"].tolist()
         
@@ -118,7 +117,7 @@ with aba1:
                 
             st.markdown("---")
             st.markdown("**[VIDA CRISTÃ]**")
-            if activar_nec_locais:
+            if necessidades_locais:
                 st.write(f"⚠️ Necessidades Locais: {anciao_nec_locais}")
             st.write(f"📖 Estudo Bíblico (Dirigente): {dirigente_estudo}")
             st.write(f"🎙️ Estudo Bíblico (Leitor): `{leitor_estudo_sorteado}`")
